@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raja Club Athletic - Equipe</title>
+    <link rel="icon" href="img/logos/logo.png">
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <script src="code.js"></script>
+    <style>
+        /************************** section class="equipe" **************************/
+
+        h2,
+        h3 {
+            font-size: 25px;
+            font-family: 'Russo One', sans-serif;
+            color: #1D3A35;
+            margin-left: 2%;
+        }
+
+        .card-joueur {
+            background: linear-gradient(180deg, #039748 0%, #013319 100%);
+            width: 260px;
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            font-family: 'Arial Black', sans-serif;
+            margin: 5px;
+        }
+
+        .hero-joueur {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .hero-joueur img {
+            width: 61%;
+        }
+
+        .photo-joueur {
+            width: 160px;
+            border-radius: 8px;
+        }
+
+        .numero-joueur {
+            color: transparent;
+            -webkit-text-stroke: 4px #DCB359;
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .info-joueur h2 {
+            color: #DCB359;
+            font-family: 'Russo One', sans-serif;
+            font-weight: normal;
+            margin: 0;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        div.Frame {
+            display: flex;
+            flex-wrap: wrap;
+            overflow-x: auto;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        button {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="Acceuil.html">
+                <img src="img/logos/logo.png" alt="Raja Logo">
+            </a>
+        </div>
+
+        <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="Acceuil.html">ACCUEIL</a></li>
+                <li><a href="Equipe.html" class="active">ÉQUIPE</a></li>
+                <li><a href="Boutique.html">BOUTIQUE</a></li>
+                <li><a href="Match.html">CENTRE DE MATCH</a></li>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier
+                        <svg class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#FFF">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="equipe">
+        <h2>&nbsp;&nbsp;&nbsp;ÉQUIPE</h2>
+
+        <h3>Gardiens</h3>
+        <div class="Frame">
+            <div class="card-joueur">
+                <div class="hero-joueur"><img src="img/joueur/k.png"><span class="numero-joueur">1</span></div>
+                <div class="info-joueur">
+                    <h2>Mehdi<br>LAHRAR</h2>
+                </div>
+            </div>
+            <div class="card-joueur">
+                <div class="hero-joueur"><img src="img/joueur/a.png"><span class="numero-joueur">12</span></div>
+                <div class="info-joueur">
+                    <h2>Khaled Kbiri<br>ALAOUI</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h3>Défenseurs</h3>
+            <div class="Frame">
+                <button class="precedent" onclick="scrollSlider(this, -220)">&lt;</button>
+                <div class="slider-wrapper">
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/e.png"><span class="numero-joueur">2</span></div>
+                        <div class="info-joueur">
+                            <h2>Abdelkarim<br>BAADI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/x.png"><span class="numero-joueur">4</span></div>
+                        <div class="info-joueur">
+                            <h2>Ismail<br>MOKADEM</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/g.png"><span class="numero-joueur">5</span></div>
+                        <div class="info-joueur">
+                            <h2>Abdelah<br>KHAFIFI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/u.png"><span class="numero-joueur">7</span></div>
+                        <div class="info-joueur">
+                            <h2>Mohamed<br>BOULACSOUT</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/r.png"><span class="numero-joueur">13</span></div>
+                        <div class="info-joueur">
+                            <h2>Badr<br>BENOUN</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/z.png"><span class="numero-joueur">17</span></div>
+                        <div class="info-joueur">
+                            <h2>Ayoub<br>AMLOUD</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/j.png"><span class="numero-joueur">24</span></div>
+                        <div class="info-joueur">
+                            <h2>Amine<br>KHAMASS</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/w.png"><span class="numero-joueur">33</span></div>
+                        <div class="info-joueur">
+                            <h2>Mehdi<br>MCHAKHCHEKH</h2>
+                        </div>
+                    </div>
+                </div>
+                <button class="next" onclick="scrollSlider(this, 220)">&gt;</button>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <h3>Milieux de terrain</h3>
+            <div class="Frame">
+                <button class="precedent" onclick="scrollSlider(this, -220)">&lt;</button>
+                <div class="slider-wrapper">
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/t.png"><span class="numero-joueur">6</span></div>
+                        <div class="info-joueur">
+                            <h2>Aymane<br>BARKOK</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/d.png"><span class="numero-joueur">8</span></div>
+                        <div class="info-joueur">
+                            <h2>Hilal<br>FIRDAOUSSI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/i.png"><span class="numero-joueur">19</span></div>
+                        <div class="info-joueur">
+                            <h2>Othmane<br>CHRAIBI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/m.png"><span class="numero-joueur">23</span></div>
+                        <div class="info-joueur">
+                            <h2>Mohamed<br>MAKAHAZI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/o.png"><span class="numero-joueur">26</span></div>
+                        <div class="info-joueur">
+                            <h2>BallaMoussa<br>CONTE</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/f.png"><span class="numero-joueur">30</span></div>
+                        <div class="info-joueur">
+                            <h2>Besar<br>HALIMI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/y.png"><span class="numero-joueur">34</span></div>
+                        <div class="info-joueur">
+                            <h2>Sabir<br>BOUGRINE</h2>
+                        </div>
+                    </div>
+                </div>
+                <button class="next" onclick="scrollSlider(this, 220)">&gt;</button>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <h3>Attaquants</h3>
+            <div class="Frame">
+                <button class="precedent" onclick="scrollSlider(this, -220)">&lt;</button>
+                <div class="slider-wrapper">
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/h.png"><span class="numero-joueur">9</span></div>
+                        <div class="info-joueur">
+                            <h2>Ismail<br>KHAFI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/l.png"><span class="numero-joueur">11</span></div>
+                        <div class="info-joueur">
+                            <h2>Ayoub<br>MAAMOURI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/p.png"><span class="numero-joueur">21</span></div>
+                        <div class="info-joueur">
+                            <h2>Mouad<br>DAHAK</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/b.png"><span class="numero-joueur">27</span></div>
+                        <div class="info-joueur">
+                            <h2>SHARARAH</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/q.png"><span class="numero-joueur">77</span></div>
+                        <div class="info-joueur">
+                            <h2>Adam<br>ENNAFATI</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/v.png"><span class="numero-joueur">79</span></div>
+                        <div class="info-joueur">
+                            <h2>Pape Ousmane<br>SAKHO</h2>
+                        </div>
+                    </div>
+                    <div class="card-joueur">
+                        <div class="hero-joueur"><img src="img/joueur/c.png"><span class="numero-joueur">99</span></div>
+                        <div class="info-joueur">
+                            <h2>Mathias<br>OYEWUSI</h2>
+                        </div>
+                    </div>
+                </div>
+                <button class="next" onclick="scrollSlider(this, 220)">&gt;</button>
+            </div>
+
+        </div>
+
+        <h3>Entraîneurs</h3>
+        <div class="Frame">
+            <div class="card-joueur">
+                <div class="hero-joueur"><img src="img/joueur/s.png"></div>
+                <div class="info-joueur">
+                    <h2>fadlu<br>davids</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- FOOTER UNIFIÉ -->
+    <footer>
+        <div class="footer_logo">
+            <img src="img/logos/logofooter.png" alt="Raja Logo Footer">
+        </div>
+        <div class="prt-1">
+            <h4>Navigation Rapide</h4>
+            <ul>
+                <li><a href="Acceuil.html">ACCUEIL</a></li>
+                <li><a href="Equipe.html">ÉQUIPE</a></li>
+                <li><a href="Boutique.html">BOUTIQUE</a></li>
+                <li><a href="Match.html">CENTRE DE MATCH</a></li>
+            </ul>
+        </div>
+        <div class="prt-2">
+            <ul>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier</a></li>
+            </ul>
+        </div>
+        <div class="prt-3">
+            <h4>NE RATEZ RIEN DE L'AIGLE</h4>
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="input_grp">
+                    <input type="email" id="email_footer" required placeholder=" ">
+                    <label for="email_footer">Email</label>
+                </div>
+                <button type="submit" class="btn-newsletter" >S'abonner</button>
+            </form>
+            <p>Inscrivez-vous pour être le premier informé des nouveaux maillots et des résultats.</p>
+        </div>
+    </footer>
+
+    <div id="customAlert" class="custom-alert">
+    <div class="alert-box">
+        <h3 id="alertTitle">Succès</h3>
+        <p id="alertMessage">Votre message a été envoyé avec succès !</p>
+        <button class="alert-btn" onclick="closeAlert()">D'accord</button>
+    </div>
+</div>
+
+</body>
+
+</html>

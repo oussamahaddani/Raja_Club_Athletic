@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raja Club Athletic - Match</title>
+    <link rel="icon" href="img/logos/logo.png">
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <script src="code.js"></script>
+    <style>
+        /************************** section class="sidebar-botola" **************************/
+        h2 {
+            font-size: 30px;
+            font-family: 'Russo One', sans-serif;
+            color: #1D3A35;
+            margin-left: 5%;
+        }
+
+        .sidebar-botola {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .next-match-box {
+            background-color: #013117;
+            color: #DCB359;
+            padding: 20px 10px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .vs-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            /* Réduit pour éviter les débordements */
+            flex-wrap: wrap;
+        }
+
+        .team-vs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-vs img {
+            width: 80px;
+            /* Taille plus adaptée aux écrans mobiles */
+            max-width: 100%;
+            height: auto;
+        }
+
+        .team-vs p {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 5px 0 0 0;
+        }
+
+        .vs-text {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .match-details p {
+            font-size: 18px;
+            margin-top: 15px;
+            line-height: 1.4;
+        }
+
+        /* Conteneur permettant le défilement horizontal du tableau sur mobile */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-classement {
+            width: 100%;
+            min-width: 600px;
+            /* Garantit une largeur minimale propre pour la lisibilité */
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 15px;
+        }
+
+        .table-classement th {
+            background-color: #f8f8f8;
+            padding: 12px 5px;
+            text-align: center;
+            border-bottom: 2px solid black;
+            font-weight: 900;
+        }
+
+        .table-classement th:first-child,
+        .table-classement td:first-child {
+            width: 35%;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .table-classement td {
+            padding: 10px 5px;
+            border-bottom: 1px solid #c5c5c5;
+            text-align: center;
+        }
+
+        .highlight-rca {
+            background-color: #cfcfcf;
+            font-weight: bold;
+        }
+
+        .mini-logo {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .premier_td {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .premier_td p {
+            margin: 0;
+        }
+
+        /* Ajustements Médias Queries Écrans PC / Large */
+        @media screen and (min-width: 768px) {
+            .team-vs img {
+                width: 140px;
+            }
+
+            .vs-header {
+                gap: 60px;
+            }
+
+            .vs-text {
+                font-size: 50px;
+            }
+
+            .team-vs p,
+            .match-details p {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="Acceuil.html">
+                <img src="img/logos/logo.png" alt="Raja Logo">
+            </a>
+        </div>
+
+        <!-- زر البورجر -->
+        <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="Acceuil.html">ACCUEIL</a></li>
+                <li><a href="Equipe.html">ÉQUIPE</a></li>
+                <li><a href="Boutique.html">BOUTIQUE</a></li>
+                <li><a href="Match.html" class="active">CENTRE DE MATCH</a></li>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier
+                        <svg class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#FFF">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="sidebar-botola">
+        <div class="next-match-box">
+            <div class="vs-header">
+                <div class="team-vs">
+                    <img src="img/les equipe/rca.png" alt="RCA">
+                    <p>RCA</p>
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-vs">
+                    <img src="img/les equipe/wac.png" alt="WAC">
+                    <p>WAC</p>
+                </div>
+            </div>
+            <div class="match-details">
+                <p class="stadium">stade Mohammed V &nbsp;&nbsp;&nbsp; 22/02/2026 &nbsp;&nbsp;&nbsp; 8PM</p>
+            </div>
+        </div>
+        <div class="classement-header">
+            <h2>Classement</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table-classement">
+                <thead>
+                    <tr>
+                        <th>Club</th>
+                        <th class="center">MJ</th>
+                        <th class="center">G</th>
+                        <th class="center">N</th>
+                        <th class="center">P</th>
+                        <th class="center">BP</th>
+                        <th class="center">BC</th>
+                        <th class="center">DB</th>
+                        <th class="center">Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-rca">
+                        <td class="premier_td">
+                            <p>1</p><img src="img/les equipe/rca.png" class="mini-logo">
+                            <p>Raja Club Athletic</p>
+                        </td>
+                        <td>14</td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>1</td>
+                        <td>15</td>
+                        <td>4</td>
+                        <td>11</td>
+                        <td>27</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>2 </p><img src="img/les equipe/wac.png" class="mini-logo">
+                            <p> Wydad Athletic Club</p>
+                        </td>
+                        <td>11</td>
+                        <td>8</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>21</td>
+                        <td>7</td>
+                        <td>14</td>
+                        <td>26</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>3 </p><img src="img/les equipe/far.jpeg" class="mini-logo">
+                            <p> AS FAR</p>
+                        </td>
+                        <td>11</td>
+                        <td>7</td>
+                        <td>4</td>
+                        <td>0</td>
+                        <td>20</td>
+                        <td>3</td>
+                        <td>17</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>4 </p><img src="img/les equipe/mas.png" class="mini-logo">
+                            <p> MAS Fès</p>
+                        </td>
+                        <td>12</td>
+                        <td>6</td>
+                        <td>6</td>
+                        <td>0</td>
+                        <td>18</td>
+                        <td>6</td>
+                        <td>12</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>5 </p><img src="img/les equipe/codm.png" class="mini-logo">
+                            <p> COD Meknès</p>
+                        </td>
+                        <td>14</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>11</td>
+                        <td>11</td>
+                        <td>0</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>6 </p><img src="img/les equipe/rsb.jpeg" class="mini-logo">
+                            <p> RS Berkane</p>
+                        </td>
+                        <td>11</td>
+                        <td>6</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>19</td>
+                        <td>11</td>
+                        <td>8</td>
+                        <td>21</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>7 </p><img src="img/les equipe/dhj.png" class="mini-logo">
+                            <p> DHJ El Jadida</p>
+                        </td>
+                        <td>13</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>10</td>
+                        <td>12</td>
+                        <td>-2</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>8 </p><img src="img/les equipe/od.jpeg" class="mini-logo">
+                            <p> Olympique Dcheira</p>
+                        </td>
+                        <td>13</td>
+                        <td>4</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>11</td>
+                        <td>17</td>
+                        <td>-6</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>9 </p><img src="img/les equipe/husa.png" class="mini-logo">
+                            <p> HUSA Agadir</p>
+                        </td>
+                        <td>14</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>7</td>
+                        <td>11</td>
+                        <td>17</td>
+                        <td>-6</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>10</p> <img src="img/les equipe/irt.png" class="mini-logo">
+                            <p> IR Tanger</p>
+                        </td>
+                        <td>14</td>
+                        <td>2</td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>11</td>
+                        <td>18</td>
+                        <td>-7</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>11</p> <img src="img/les equipe/fus.png" class="mini-logo">
+                            <p> FUS Rabat</p>
+                        </td>
+                        <td>13</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>7</td>
+                        <td>14</td>
+                        <td>19</td>
+                        <td>-5</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>12</p> <img src="img/les equipe/kacm.png" class="mini-logo">
+                            <p> KACM Marrakech</p>
+                        </td>
+                        <td>13</td>
+                        <td>2</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>-1</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>13</p> <img src="img/les equipe/rcaz.jpeg" class="mini-logo">
+                            <p> RCA Zemamra</p>
+                        </td>
+                        <td>13</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>7</td>
+                        <td>10</td>
+                        <td>19</td>
+                        <td>-9</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>14</p> <img src="img/les equipe/uts.jpeg" class="mini-logo">
+                            <p> Union Touarga</p>
+                        </td>
+                        <td>14</td>
+                        <td>0</td>
+                        <td>9</td>
+                        <td>5</td>
+                        <td>11</td>
+                        <td>19</td>
+                        <td>-8</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>15</p> <img src="img/les equipe/usym.jpeg" class="mini-logo">
+                            <p> USYM Mansour</p>
+                        </td>
+                        <td>13</td>
+                        <td>1</td>
+                        <td>4</td>
+                        <td>8</td>
+                        <td>11</td>
+                        <td>19</td>
+                        <td>-8</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td class="premier_td">
+                            <p>16</p> <img src="img/les equipe/ocs.jpeg" class="mini-logo">
+                            <p> OC Safi</p>
+                        </td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>4</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>17</td>
+                        <td>-10</td>
+                        <td>7</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+<!-- FOOTER UNIFIÉ -->
+    <footer>
+        <div class="footer_logo">
+            <img src="img/logos/logofooter.png" alt="Raja Logo Footer">
+        </div>
+        <div class="prt-1">
+            <h4>Navigation Rapide</h4>
+            <ul>
+                <li><a href="Acceuil.html">ACCUEIL</a></li>
+                <li><a href="Equipe.html">ÉQUIPE</a></li>
+                <li><a href="Boutique.html">BOUTIQUE</a></li>
+                <li><a href="Match.html">CENTRE DE MATCH</a></li>
+            </ul>
+        </div>
+        <div class="prt-2">
+            <ul>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier</a></li>
+            </ul>
+        </div>
+        <div class="prt-3">
+            <h4>NE RATEZ RIEN DE L'AIGLE</h4>
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="input_grp">
+                    <input type="email" id="email_footer" required placeholder=" ">
+                    <label for="email_footer">Email</label>
+                </div>
+                <button type="submit" class="btn-newsletter">S'abonner</button>
+            </form>
+            <p>Inscrivez-vous pour être le premier informé des nouveaux maillots et des résultats.</p>
+        </div>
+    </footer>
+
+    <!-- POP-UP ALERT (Khassha tkoun f ga3 les pages lteht qbel </body>) -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-box">
+            <h3 id="alertTitle">Succès</h3>
+            <p id="alertMessage">Votre message a été envoyé avec succès !</p>
+            <button class="alert-btn" onclick="closeAlert()">D'accord</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

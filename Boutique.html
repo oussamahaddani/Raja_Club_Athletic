@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raja Club Athletic - Boutique</title>
+    <link rel="icon" href="img/logos/logo.png">
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <script src="code.js" defer></script>
+    <style>
+        /************************** section class=section_boutique **************************/
+
+        h2,
+        h3 {
+            font-size: 30px;
+            font-family: 'Russo One', sans-serif;
+            color: #1D3A35;
+            margin-left: 2%;
+        }
+
+        section.section_shop h3 {
+            font-size: 30px;
+            font-family: 'Russo One', sans-serif;
+            color: #1D3A35;
+        }
+
+        div.shop_grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 5px;
+            width: 100%;
+            padding: 5px;
+        }
+
+        div.produit {
+            flex: 0 1;
+            height: 390px;
+            padding: auto;
+            margin-left: 5px;
+            margin-right: 5px;
+            background-color: #D5D5D5;
+            margin-top: 5px;
+            box-shadow: 2px 2px;
+        }
+
+        .next,
+        .prcedent {
+            display: none;
+        }
+
+        div.produit .img {
+            margin: 5px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: auto;
+            padding-top: auto;
+            height: calc(100% *(2/ 3));
+            display: block;
+            border: 1px solid #9d9d9d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img img {
+            width: 100%;
+            height: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .product_info {
+            height: calc(100% *(1 / 3));
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        svg.icon-panier {
+            cursor: pointer;
+        }
+
+
+        .price-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .products {
+            display: flex;
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .product-card button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .product-card button:hover {
+            background-color: #218838;
+        }
+
+        .nav-cart {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+
+        /* ==========================================
+   DESIGN DES ALERTS / NOTIFICATIONS (RCA)
+   ========================================== */
+
+        /* 1. Modal Alert (Pop-up centrale) */
+        .custom-alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(23, 28, 42, 0.6);
+            /* Overlay sombre avec ton bleu nuit */
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .custom-alert.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .alert-box {
+            background: #171C2A;
+            /* Bleu nuit pour le prestige */
+            border: 2px solid #CDA23B;
+            /* Contour doré */
+            border-radius: 12px;
+            padding: 25px 30px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .custom-alert.active .alert-box {
+            transform: translateY(0);
+        }
+
+        .alert-box h3 {
+            font-family: 'Russo One', sans-serif;
+            font-size: 22px;
+            color: #CDA23B;
+            /* Doré */
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .alert-box p {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #FFFFFF;
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .alert-btn {
+            background: #1D3A35;
+            /* Vert institutionnel */
+            color: #FFFFFF;
+            border: 1px solid #CDA23B;
+            padding: 10px 24px;
+            font-family: 'Russo One', sans-serif;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .alert-btn:hover {
+            background: #CDA23B;
+            color: #171C2A;
+        }
+
+        /* 2. Toast Notification (Notification discrète en haut à droite) */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #171C2A;
+            color: #FFF;
+            border-left: 4px solid #CDA23B;
+            padding: 14px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            min-width: 280px;
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        .toast.success {
+            border-left-color: #CDA23B;
+        }
+
+        .toast.error {
+            border-left-color: #d9534f;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .nom_produit{
+            margin: 0 0 !important;
+            font-size: 15px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="Acceuil.html">
+                <img src="img/logos/logo.png" alt="Raja Logo">
+            </a>
+        </div>
+
+        <!-- زر البورجر -->
+        <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="Acceuil.html">ACCUEIL</a></li>
+                <li><a href="Equipe.html">ÉQUIPE</a></li>
+                <li><a href="Boutique.html" class="active">BOUTIQUE</a></li>
+                <li><a href="Match.html">CENTRE DE MATCH</a></li>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier
+                        <svg class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#FFF">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section_boutique">
+        <h2>&nbsp;&nbsp;&nbsp;Boutique</h2>
+        <h3>Tenue</h3>
+        <div class="shop_grid">
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/a.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Third 25/26</p>
+                    <div class="price-action">
+                        <p>450 DH</p>
+
+                        <svg onclick="addToCart('Tenue Third 25/26', 450, 'img/boutique/a.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/b.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Extérieur 25/26</p>
+                    <div class="price-action">
+                        <p>450 DH</p>
+
+                        <svg onclick="addToCart('Tenue Extérieur 25/26', 450, 'img/boutique/b.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/c.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Domicile 23/24</p>
+                    <div class="price-action">
+                        <p>350 DH</p>
+
+                        <svg onclick="addToCart('Tenue Domicile 23/24', 350, 'img/boutique/c.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/d.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Domicile 25/26</p>
+                    <div class="price-action">
+                        <p>450 DH</p>
+
+                        <svg onclick="addToCart('Tenue Domicile 25/26', 450, 'img/boutique/d.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/e.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Extérieur 23/24</p>
+                    <div class="price-action">
+                        <p>400 DH</p>
+
+                        <svg onclick="addToCart('Tenue Extérieur 23/24', 400, 'img/boutique/e.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/f.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Third 23/24</p>
+                    <div class="price-action">
+                        <p>350 DH</p>
+
+                        <svg onclick="addToCart('Tenue Third 23/24', 350, 'img/boutique/f.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/g.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Domicile 24/25</p>
+                    <div class="price-action">
+                        <p>400 DH</p>
+
+                        <svg onclick="addToCart('Tenue Domicile 24/25', 400, 'img/boutique/g.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/h.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Extérieur 24/25</p>
+                    <div class="price-action">
+                        <p>400 DH</p>
+
+                        <svg onclick="addToCart('Tenue Extérieur 24/25', 400, 'img/boutique/h.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/i.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue (NEW)</p>
+                    <div class="price-action">
+                        <p>400 DH</p>
+
+                        <svg onclick="addToCart('Tenue (NEW)', 400, 'img/boutique/i.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Godasse</h3>
+        <div class="shop_grid">
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/0.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 1</p>
+                    <div class="price-action">
+                        <p>300 DH</p>
+
+                        <svg onclick="addToCart('Godasse 1', 300, 'img/boutique/0.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/1.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 2</p>
+                    <div class="price-action">
+                        <p>270 DH</p>
+
+                        <svg onclick="addToCart('Godasse 2', 270, 'img/boutique/1.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/2.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 3</p>
+                    <div class="price-action">
+                        <p>270 DH</p>
+
+                        <svg onclick="addToCart('Godasse 3', 270, 'img/boutique/2.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/3.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 4</p>
+                    <div class="price-action">
+                        <p>250 DH</p>
+
+                        <svg onclick="addToCart('Godasse 4', 250, 'img/boutique/3.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/4.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 5</p>
+                    <div class="price-action">
+                        <p>200 DH</p>
+
+                        <svg onclick="addToCart('Godasse 5', 200, 'img/boutique/4.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/5.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 6</p>
+                    <div class="price-action">
+                        <p>300 DH</p>
+
+                        <svg onclick="addToCart('Godasse 6', 300, 'img/boutique/5.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/6.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 7</p>
+                    <div class="price-action">
+                        <p>300 DH</p>
+
+                        <svg onclick="addToCart('Godasse 7', 300, 'img/boutique/6.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/7.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 8</p>
+                    <div class="price-action">
+                        <p>200 DH</p>
+
+                        <svg onclick="addToCart('Godasse 8', 200, 'img/boutique/7.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/8.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 9</p>
+                    <div class="price-action">
+                        <p>250 DH</p>
+
+                        <svg onclick="addToCart('Godasse 9', 250, 'img/boutique/8.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/9.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 10</p>
+                    <div class="price-action">
+                        <p>270 DH</p>
+
+                        <svg onclick="addToCart('Godasse 10', 270, 'img/boutique/9.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h3>Casquette</h3>
+        <div class="shop_grid">
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/j.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(blanc)</p>
+                    <div class="price-action">
+                        <p>170 DH</p>
+
+                        <svg onclick="addToCart('Casquette(blanc)', 170, 'img/boutique/j.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/k.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(noir)</p>
+                    <div class="price-action">
+                        <p>170 DH</p>
+
+                        <svg onclick="addToCart('Casquette(noir)', 170, 'img/boutique/k.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/l.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(doré)</p>
+                    <div class="price-action">
+                        <p>170 DH</p>
+
+                        <svg onclick="addToCart('Casquette(doré)', 170, 'img/boutique/l.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/m.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(vert)</p>
+                    <div class="price-action">
+                        <p>170 DH</p>
+
+                        <svg onclick="addToCart('Casquette(vert)', 170, 'img/boutique/m.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/n.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(noir SPANSOR )</p>
+                    <div class="price-action">
+                        <p>150 DH</p>
+
+                        <svg onclick="addToCart('Casquette(noir SPANSOR )', 150, 'img/boutique/n.png')"
+                            class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/o.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(blanc & doré)</p>
+                    <div class="price-action">
+                        <p>170 DH</p>
+
+                        <svg onclick="addToCart('Casquette(blanc & doré)', 170, 'img/boutique/o.png')"
+                            class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/p.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(vert & doré)</p>
+                    <div class="price-action">
+                        <p>170 DH</p>
+
+                        <svg onclick="addToCart('Casquette(vert & doré)', 170, 'img/boutique/p.png')"
+                            class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/q.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(vert & noir)</p>
+                    <div class="price-action">
+                        <p>200 DH</p>
+
+                        <svg onclick="addToCart('Casquette(vert & noir)', 200, 'img/boutique/q.png')"
+                            class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/r.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(blanc 2)</p>
+                    <div class="price-action">
+                        <p>200 DH</p>
+
+                        <svg onclick="addToCart('Casquette(blanc 2)', 200, 'img/boutique/r.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h3>Ballons</h3>
+        <div class="shop_grid">
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/s.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 1</p>
+                    <div class="price-action">
+                        <p>150 DH</p>
+
+                        <svg onclick="addToCart('Ballon 1', 150, 'img/boutique/s.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/t.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 2</p>
+                    <div class="price-action">
+                        <p>150 DH</p>
+
+                        <svg onclick="addToCart('Ballon 2', 150, 'img/boutique/t.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/u.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 3</p>
+                    <div class="price-action">
+                        <p>200 DH</p>
+
+                        <svg onclick="addToCart('Ballon 3', 200, 'img/boutique/u.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/v.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 4</p>
+                    <div class="price-action">
+                        <p>200 DH</p>
+
+                        <svg onclick="addToCart('Ballon 4', 200, 'img/boutique/v.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/w.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 5</p>
+                    <div class="price-action">
+                        <p>200 DH</p>
+
+                        <svg onclick="addToCart('Ballon 5', 200, 'img/boutique/w.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/x.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 6</p>
+                    <div class="price-action">
+                        <p>250 DH</p>
+
+                        <svg onclick="addToCart('Ballon 6', 250, 'img/boutique/x.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/y.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 7</p>
+                    <div class="price-action">
+                        <p>250 DH</p>
+
+                        <svg onclick="addToCart('Ballon 7', 250, 'img/boutique/y.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/z.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 8</p>
+                    <div class="price-action">
+                        <p>250 DH</p>
+
+                        <svg onclick="addToCart('Ballon 8', 250, 'img/boutique/z.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/zz.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 9</p>
+                    <div class="price-action">
+                        <p>250 DH</p>
+
+                        <svg onclick="addToCart('Ballon 9', 250, 'img/boutique/zz.png')" class="icon-panier"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#CDA23B">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Container pour les notifications Toasts -->
+        <div id="toastContainer" class="toast-container"></div>
+
+        <!-- Modal Custom Alert -->
+        <div id="customAlert" class="custom-alert">
+            <div class="alert-box">
+                <h3 id="alertTitle">PRODUIT AJOUTÉ</h3>
+                <p id="alertMessage">Votre article a été ajouté au panier avec succès !</p>
+                <button class="alert-btn" onclick="closeAlert()">D'ACCORD</button>
+            </div>
+        </div>
+
+
+
+    </section>
+    <!-- FOOTER UNIFIÉ -->
+    <footer>
+        <div class="footer_logo">
+            <img src="img/logos/logofooter.png" alt="Raja Logo Footer">
+        </div>
+        <div class="prt-1">
+            <h4>Navigation Rapide</h4>
+            <ul>
+                <li><a href="Acceuil.html">ACCUEIL</a></li>
+                <li><a href="Equipe.html">ÉQUIPE</a></li>
+                <li><a href="Boutique.html">BOUTIQUE</a></li>
+                <li><a href="Match.html">CENTRE DE MATCH</a></li>
+            </ul>
+        </div>
+        <div class="prt-2">
+            <ul>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier</a></li>
+            </ul>
+        </div>
+        <div class="prt-3">
+            <h4>NE RATEZ RIEN DE L'AIGLE</h4>
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="input_grp">
+                    <input type="email" id="email_footer" required placeholder=" ">
+                    <label for="email_footer">Email</label>
+                </div>
+                <button type="submit" class="btn-newsletter">S'abonner</button>
+            </form>
+            <p>Inscrivez-vous pour être le premier informé des nouveaux maillots et des résultats.</p>
+        </div>
+    </footer>
+
+    <!-- POP-UP ALERT (Khassha tkoun f ga3 les pages lteht qbel </body>) -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-box">
+            <h3 id="alertTitle">Succès</h3>
+            <p id="alertMessage">Votre message a été envoyé avec succès !</p>
+            <button class="alert-btn" onclick="closeAlert()">D'accord</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

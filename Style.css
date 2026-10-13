@@ -1,0 +1,857 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+h2 {
+    font-family: 'Russo One', sans-serif;
+}
+
+header,
+section,
+main,
+footer {
+    margin-bottom: 10px;
+}
+
+/****************** header **********************/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 3%;
+    background-color: #1D3A35;
+    min-height: 80px;
+}
+
+.logo {
+    float: left;
+    padding: 20px;
+}
+
+.main-nav .active,
+footer .active {
+    color: #039748;
+}
+
+nav {
+    text-align: right;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style-type: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav li {
+    float: left;
+    margin-right: 15px;
+}
+
+nav a {
+    font-size: 1.3em;
+    text-decoration: none;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: #CDA23B;
+}
+
+nav.main-nav li:hover svg {
+    fill: #CDA23B !important;
+}
+
+/************************** footer **************************/
+
+footer {
+    width: 100%;
+    height: fit-content;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #1D3A35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.footer_logo {
+    margin: 10px;
+}
+
+footer div {
+    width: 24%;
+}
+
+footer ul {
+    list-style-type: none;
+}
+
+footer a {
+    font-size: 1.3em;
+    text-decoration: none;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+}
+
+footer p {
+    color: white;
+}
+
+footer a:hover,
+footer a:hover svg {
+    color: #CDA23B;
+    fill: #CDA23B !important;
+}
+
+footer h4 {
+    color: #039748;
+}
+
+.prt-3 input {
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.prt-3 input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input_grp {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input_grp label {
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    background-color: #1D3A35;
+    padding: 0 5px;
+    color: #999;
+    pointer-events: none;
+    transition: 0.2s ease-all;
+}
+
+.input_grp input:focus+label,
+.input-group input:not(:placeholder-shown)+label {
+    top: -10px;
+    left: 12px;
+    font-size: 13px;
+    color: #039748;
+    font-weight: bold;
+    transition: 0.8s;
+}
+
+.input_grp input:focus {
+    border: 3px solid #039748;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (PC, Tablette, Mobile & Smart TV)
+   ========================================================= */
+
+/* Base Adjustments for Images */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+/* Configuration du conteneur en scroll horizontal */
+div.shop_grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;       /* Évite le retour à la ligne */
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    overflow-x: auto !important;         /* Active le défilement horizontal */
+    scroll-snap-type: x mandatory;       /* Rend le scroll fluide et calé */
+    gap: 15px !important;               /* Espace entre les cartes */
+    padding: 10px 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch;  /* Défilement fluide sur mobile */
+}
+
+/* Fixer la taille des cartes de produits */
+div.produit {
+    flex: 0 0 250px !important;          /* Largeur fixe de la carte */
+    width: 250px !important;
+    min-width: 250px !important;
+    scroll-snap-align: start;            /* Calage au début lors du scroll */
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Optionnel : Masquer ou personnaliser la barre de défilement */
+div.shop_grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+div.shop_grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+div.shop_grid::-webkit-scrollbar-thumb {
+    background: #1D3A35;
+    border-radius: 4px;
+}
+
+div.shop_grid::-webkit-scrollbar-thumb:hover {
+    background: #039748;
+}
+
+/************************** Style Newsletter Footer **************************/
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.newsletter-form .input_grp {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.btn-newsletter {
+    background-color: #DCB359;
+    color: #171C2A;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    height: 45px;
+}
+
+.btn-newsletter:hover {
+    background-color: #b89243;
+}
+
+/************************** Style Custom Alert Pop-up **************************/
+.custom-alert {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.alert-box {
+    background: #171C2A;
+    border: 2px solid #DCB359;
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 85%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.alert-box h3 {
+    color: #DCB359;
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.alert-box p {
+    font-size: 16px;
+    margin: 15px 0 25px;
+}
+
+.alert-btn {
+    background-color: #039748;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.alert-btn:hover {
+    background-color: #027a3a;
+}
+
+/* Structure globale de l'alerte */
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+/* Classe activée en JavaScript */
+.custom-alert.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Boîte de message */
+.alert-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 85%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-top: 5px solid #DCB359;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom-alert.active .alert-box {
+    transform: translateY(0);
+}
+
+.alert-box h3 {
+    margin-top: 0;
+    color: #171C2A;
+    font-size: 22px;
+}
+
+.alert-box p {
+    color: #555;
+    font-size: 15px;
+    margin: 15px 0 25px;
+    line-height: 1.4;
+}
+
+.alert-btn {
+    background: linear-gradient(90deg, #039748 0%, #013319 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.alert-btn:hover {
+    background: #039748;
+}
+
+
+
+
+@keyframes fadeIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+/* ---------------------------------------------------------
+   1. TABLETTE (Max Width: 1024px)
+   --------------------------------------------------------- */
+@media screen and (max-width: 1024px) {
+
+    /* Header & Navigation */
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .logo {
+        float: none;
+        padding: 10px 0;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    /* Accueil Main Section */
+    main.main {
+        grid-template-columns: 1fr;
+        /* Switch to single column */
+        gap: 20px;
+    }
+
+    section.section1 {
+        margin-right: 0;
+    }
+
+    /* Footer */
+    footer {
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+    }
+
+    footer div {
+        width: 45%;
+        margin-bottom: 20px;
+    }
+
+    /* Match Page Header */
+    .vs-header {
+        gap: 40px;
+    }
+
+    .team-vs img {
+        width: 120px;
+    }
+
+    /* Force le conteneur à aligner au début (à gauche) */
+    .Frame,
+    .slider-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important; /* Force le début à gauche */
+        align-items: stretch !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        
+        /* Réinitialisation des marges et paddings pour éviter le décalage */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 15px !important;  /* Marge propre à gauche */
+        padding-right: 15px !important; /* Marge propre à droite */
+        
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Assure que la première carte n'a pas de marge négative */
+    .card-joueur:first-child {
+        margin-left: 0 !important;
+    }
+
+    /* Fixe la taille propre des cartes */
+    .card-joueur {
+        flex: 0 0 170px !important;
+        width: 170px !important;
+        min-width: 170px !important;
+        scroll-snap-align: start;
+        box-sizing: border-box !important;
+    }
+
+    /* Cache totalement les éléments supprimés si présents */
+    .Frame button,
+    .slider-wrapper button {
+        display: none !important;
+    }
+
+    .numero-joueur,
+    .card-joueur .numero,
+    .card-joueur span[class*="num"] {
+        font-size: 40px !important;       /* Taille plus petite et équilibrée */
+        line-height: 1 !important;
+        -webkit-text-stroke: 1px #DCB359 !important; /* Contour plus fin si utilisé */
+    }
+
+    /* Réduction du nom et prénom du joueur */
+    .info-joueur h2,
+    .info-joueur h3,
+    .card-joueur h2,
+    .card-joueur h3,
+    .card-joueur .nom {
+        font-size: 20px !important;       /* Taille adaptée pour tenir sur 2 lignes */
+        line-height: 1.2 !important;
+        margin-top: 3px !important;
+        word-break: break-word !important; /* Évite que le nom ne dépasse de la carte */
+    }
+
+    /* Ajustement du bloc d'information */
+    .info-joueur {
+        padding: 5px !important;
+        text-align: left !important;
+    }
+
+    /* Ajustement de l'image du joueur */
+    .hero-joueur img,
+    .card-joueur img {
+        max-height: 90px !important;      /* Évite que l'image ne prenne trop de place */
+        width: auto !important;
+        object-fit: contain !important;
+    }
+    div.produit {
+        flex: 0 0 180px !important;
+        width: 180px !important;
+        min-width: 180px !important;
+        height: 280px !important;
+    }
+}
+
+/* =========================================================
+   2. MOBILE / TELEPHONE (Max Width: 768px)
+   ========================================================= */
+@media screen and (max-width: 768px) {
+
+    /* Header fixe et aligné */
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+    .logo {
+        padding: 0;
+    }
+
+    .logo img {
+        height: 45px;
+        width: auto;
+    }
+
+    /* 1. Bouton Hamburger */
+    .burger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 22px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .burger-btn span {
+        width: 100%;
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+    }
+
+    /* Menu Navigation Mobile (Drawer) */
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background-color: #1D3A35;
+        padding-top: 80px;
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-nav.open {
+        right: 0 !important;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 25px;
+        gap: 20px;
+    }
+
+    .main-nav a {
+        font-size: 1.2em;
+    }
+
+    /* 3. L'Article prend 100% de la largeur de la page */
+    main.main {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    section.section1 {
+        width: 100% !important;
+        margin-right: 0 !important;
+        box-sizing: border-box;
+    }
+
+    /* 2 & 3. Bouton Vert & Sidebar (au-dessus de l'article) */
+    .aside-toggle-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        right: 15px;
+        top: 45%;
+        width: 45px;
+        height: 45px;
+        background-color: #009748;
+        color: white;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        z-index: 998;
+        cursor: pointer;
+    }
+
+    aside.sidebar {
+        position: fixed !important;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        height: 100vh;
+        background-color: #009748;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        transition: right 0.3s ease-in-out;
+        z-index: 999; /* Affiché au-dessus de l'article */
+        overflow-y: auto;
+        border-radius: 0 !important;
+        padding: 20px 15px;
+        box-sizing: border-box;
+    }
+
+    aside.sidebar.active {
+        right: 0 !important;
+    }
+
+    .close-aside-btn {
+        display: block !important;
+        background: transparent;
+        color: white;
+        border: none;
+        font-size: 28px;
+        font-weight: bold;
+        float: left;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    /* Ajustements cartes produits */
+    div.produit {
+        flex: 0 1 45% !important;
+        max-width: 160px !important;
+        height: 240px !important;
+        margin: 4px !important;
+    }
+
+    div.produit p {
+        font-size: 12px !important;
+    }
+
+    .price-action p {
+        font-size: 13px !important;
+    }
+
+    .price-action svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    footer div.prt-1,
+    footer div.prt-2 {
+        display: none;
+    }
+
+    footer {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+        padding: 20px 15px !important;
+        gap: 15px;
+    }
+
+    /* Redimensionnement et centrage du logo */
+    .footer_logo {
+        width: 100% !important;
+        margin: 0 0 10px 0 !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer_logo img {
+        max-width: 140px !important; /* Taille réduite pour le logo */
+        height: auto;
+    }
+
+    /* Ajustement du bloc d'inscription / newsletter */
+    footer div.prt-3 {
+        width: 100% !important;
+        max-width: 320px; /* Evite que le bloc dépasse */
+        margin: 0 auto;
+    }
+
+    footer div.prt-3 h4 {
+        font-size: 16px !important;
+        margin-bottom: 15px;
+    }
+
+    .input_grp {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .prt-3 input {
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 8px 12px !important;
+        font-size: 14px;
+    }
+
+    .input_grp label {
+        font-size: 14px;
+    }
+
+    footer p {
+        font-size: 13px !important;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    footer div.prt-1,
+    footer div.prt-2 {
+        display: none;
+    }
+}
+@media screen and (min-width: 769px) {
+    .burger-btn {
+        display: none;
+    }
+
+    .aside-toggle-btn,
+    .close-aside-btn {
+        display: none;
+    }
+
+
+    /* Force le conteneur à aligner au début (à gauche) */
+    .Frame,
+    .slider-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important; /* Force le début à gauche */
+        align-items: stretch !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        
+        /* Réinitialisation des marges et paddings pour éviter le décalage */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 15px !important;  /* Marge propre à gauche */
+        padding-right: 15px !important; /* Marge propre à droite */
+        
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Assure que la première carte n'a pas de marge négative */
+    .card-joueur:first-child {
+        margin-left: 0 !important;
+    }
+
+    /* Fixe la taille propre des cartes */
+    .card-joueur {
+        flex: 0 0 170px !important;
+        width: 170px !important;
+        min-width: 170px !important;
+        scroll-snap-align: start;
+        box-sizing: border-box !important;
+    }
+
+    /* Cache totalement les éléments supprimés si présents */
+    .Frame button,
+    .slider-wrapper button {
+        display: none !important;
+    }
+
+    .numero-joueur,
+    .card-joueur .numero,
+    .card-joueur span[class*="num"] {
+        font-size: 40px !important;       /* Taille plus petite et équilibrée */
+        line-height: 1 !important;
+        -webkit-text-stroke: 1px #DCB359 !important; /* Contour plus fin si utilisé */
+    }
+
+    /* Réduction du nom et prénom du joueur */
+    .info-joueur h2,
+    .info-joueur h3,
+    .card-joueur h2,
+    .card-joueur h3,
+    .card-joueur .nom {
+        font-size: 20px !important;       /* Taille adaptée pour tenir sur 2 lignes */
+        line-height: 1.2 !important;
+        margin-top: 3px !important;
+        word-break: break-word !important; /* Évite que le nom ne dépasse de la carte */
+    }
+
+    /* Ajustement du bloc d'information */
+    .info-joueur {
+        padding: 5px !important;
+        text-align: left !important;
+    }
+
+    /* Ajustement de l'image du joueur */
+    .hero-joueur img,
+    .card-joueur img {
+        max-height: 90px !important;      /* Évite que l'image ne prenne trop de place */
+        width: auto !important;
+        object-fit: contain !important;
+    }
+    div.produit {
+        flex: 0 0 180px !important;
+        width: 180px !important;
+        min-width: 180px !important;
+        height: 280px !important;
+    }
+}
+
+/* ---------------------------------------------------------
+   3. SMART TV / GRAND ECRAN (Min Width: 1440px)
+   --------------------------------------------------------- */
+@media screen and (min-width: 1440px) {
+    body {
+        max-width: 1600px;
+        margin: 0 auto;
+        font-size: 20px;
+    }
+
+    header {
+        padding: 15px 5%;
+    }
+
+    .sidebar-botola,
+    #slideshow {
+        max-width: 1400px;
+    }
+}

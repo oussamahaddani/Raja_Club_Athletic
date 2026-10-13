@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raja Club Athletic - Accueil</title>
+    <link rel="icon" href="img/logos/logo.png">
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <script src="code.js"></script>
+    <style>
+        /****************** section class ="hero" **********************************/
+        #slideshow {
+            width: 100%;
+            max-width: 1420px;
+            aspect-ratio: 16 / 7;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            animation: diaporma 15s infinite ease-in-out;
+        }
+
+        .slider img {
+            width: calc(100% / 3);
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes diaporma {
+
+            0%,
+            28% {
+                left: 0%;
+            }
+
+            33%,
+            61% {
+                left: -100%;
+            }
+
+            66%,
+            94% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        /*********************** main class="main" (section & aside) ****************************/
+        main.main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+        }
+
+        /* --- section --- */
+        section.section1 {
+            margin-right: 5px;
+        }
+
+        section.section1 img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        section.section1 p {
+            color: gray;
+            font-weight: bold;
+            font-size: larger;
+        }
+
+        section.section1 a {
+            text-decoration: none;
+            color: #CDA23B;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* --- aside --- */
+        #match {
+            text-decoration: none;
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar {
+            background-color: #009748;
+            padding: 10px 10px;
+            border-radius: 25px;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .widget-header {
+            margin: 10px;
+        }
+
+        .widget-header h2 {
+            font-size: 22px;
+            margin: 0;
+        }
+
+        /* --- Style Tableau --- */
+        .table-ranking {
+            width: 100%;
+            background-color: white;
+            border-collapse: collapse;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .table-ranking th {
+            background-color: white;
+            padding: 8px;
+            font-size: 18px;
+        }
+
+        .table-ranking td {
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 16px;
+            border-bottom: 2px solid #009748;
+        }
+
+        .text-left {
+            text-align: left !important;
+            padding-left: 15px !important;
+        }
+
+        .team-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .team-cell img {
+            width: 30px;
+            height: 35px;
+        }
+
+        .highlight {
+            background-color: #e0e0e0;
+            border-left: 8px solid black;
+        }
+
+        /* --- Next Match Section --- */
+        .next_match h3 {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .match-display {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .team img {
+            width: 65px;
+        }
+
+        .team span {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .vs {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .match-info {
+            text-align: center;
+            font-size: 18px;
+            font-weight: inherit;
+        }
+
+        /******************** section class="section_shop" **********************/
+
+        h2,
+        h3 {
+            font-size: 30px;
+            font-family: 'Russo One', sans-serif;
+            color: #1D3A35;
+            margin-left: 2%;
+        }
+
+        section.section_shop h3 {
+            font-size: 30px;
+            font-family: 'Russo One', sans-serif;
+            color: #1D3A35;
+        }
+
+        div.shop_grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 5px;
+            width: 100%;
+            padding: 5px;
+        }
+
+        div.produit {
+            flex: 0 1 290px;
+            height: 350px;
+            padding: auto;
+            margin-left: 5px;
+            margin-right: 5px;
+            background-color: #D5D5D5;
+            margin-top: 5px;
+            box-shadow: 2px 2px;
+        }
+
+        .next,
+        .prcedent {
+            display: none;
+        }
+
+        div.produit .img {
+            margin: 5px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: auto;
+            padding-top: auto;
+            height: calc(100% *(2/ 3));
+            display: block;
+            border: 1px solid #9d9d9d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img img {
+            width: 100%;
+            height: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        svg.icon-panier {
+            cursor: pointer;
+        }
+
+        .product_info {
+            height: calc(100% *(1/ 3));
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .nom_produit{
+            margin: 0 0 !important;
+            font-size: 15px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="Acceuil.html">
+                <img src="img/logos/logo.png" alt="Raja Logo">
+            </a>
+        </div>
+
+        <!-- زر البورجر -->
+        <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="Acceuil.html" class="active">ACCUEIL</a></li>
+                <li><a href="Equipe.html">ÉQUIPE</a></li>
+                <li><a href="Boutique.html">BOUTIQUE</a></li>
+                <li><a href="Match.html">CENTRE DE MATCH</a></li>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier
+                        <svg class="icon-panier" xmlns="http://www.w3.org/2000/svg" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#FFF">
+                            <path
+                                d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div id="slideshow">
+            <div class="slider">
+                <img src="img/Frame 1.png">
+                <img src="img/Frame 2.png">
+                <img src="img/Frame 3.png">
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <section class="section1">
+            <img src="img/entr.PNG">
+            <h2>Les Verts affûtent leurs armes</h2>
+            <p>Le staff technique met en place les derniers réglages tactiques avant le choc de dimanche au stade
+                Mohammed V.</p>
+            <a href="Actualite.html" class="Lire_la_suite">Lire la suite</a>
+        </section>
+
+        <button id="toggleAsideBtn" class="aside-toggle-btn" onclick="toggleAside()">&lt;</button>
+        <aside class="sidebar" id="sidebar">
+            <button class="close-aside-btn" onclick="toggleAside()">&gt;</button>
+            <div id="flexTAB">
+                <div class="widget-header">
+                    <a href="Match.html" id="match">
+                        <h2>Classement <br> Botola</h2>
+                        <span class="chevron-icon">></span>
+                    </a>
+                </div>
+
+                <table class="table-ranking">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Club</th>
+                            <th>Mj</th>
+                            <th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight">
+                            <td class="team-cell"><span class="rank-num">1</span> <img src="img/les equipe/rca.png">
+                                <strong>RCA</strong>
+                            </td>
+                            <td>14</td>
+                            <td>27</td>
+                        </tr>
+                        <tr>
+                            <td class="team-cell"><span class="rank-num">2</span> <img src="img/les equipe/wac.png">
+                                <strong>WAC</strong>
+                            </td>
+                            <td>11</td>
+                            <td>26</td>
+                        </tr>
+                        <tr>
+                            <td class="team-cell"><span class="rank-num">3</span> <img src="img/les equipe/far.jpeg">
+                                <strong>FAR</strong>
+                            </td>
+                            <td>11</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td class="team-cell"><span class="rank-num">4</span> <img src="img/les equipe/mas.png">
+                                <strong>MAS</strong>
+                            </td>
+                            <td>12</td>
+                            <td>24</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="next_match">
+                <h3>NEXT MATCH</h3>
+                <div class="match-display">
+                    <div class="team">
+                        <img src="img/les equipe/rca.png">
+                        <span>RCA</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <img src="img/les equipe/wac.png">
+                        <span>WAC</span>
+                    </div>
+                </div>
+                <div class="match-info">
+                    <p>stade Mohammed V</p>
+                    <p>22/02/2026 &nbsp;&nbsp;&nbsp; 8PM</p>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <section class="section_shop">
+        <h3>Nos meilleurs ventes</h3>
+        <div class="shop_grid">
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/a.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Tenue Third 25/26</p>
+                    <div class="price-action">
+                        <p>450 DH</p>
+
+                        <a href="Boutique.html"><svg class="icon-panier" xmlns="http://www.w3.org/2000/svg"
+                                height="24px" viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                                <path
+                                    d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                            </svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/9.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Godasse 10</p>
+                    <div class="price-action">
+                        <p>270 DH</p>
+
+                        <a href="Boutique.html"><svg class="icon-panier" xmlns="http://www.w3.org/2000/svg"
+                                height="24px" viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                                <path
+                                    d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                            </svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/j.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Casquette(blanc)</p>
+                    <div class="price-action">
+                        <p>170 DH</p>
+
+                        <a href="Boutique.html"><svg class="icon-panier" xmlns="http://www.w3.org/2000/svg"
+                                height="24px" viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                                <path
+                                    d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                            </svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="produit">
+                <div class="img">
+                    <img src="img/boutique/z.png" alt="Maillot">
+                </div>
+                <div class="product_info">
+                    <p class="nom_produit">Ballon 8</p>
+                    <div class="price-action">
+                        <p>250 DH</p>
+
+                        <a href="Boutique.html"><svg class="icon-panier" xmlns="http://www.w3.org/2000/svg"
+                                height="24px" viewBox="0 -960 960 960" width="24px" fill="#CDA23B">
+                                <path
+                                    d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                            </svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- FOOTER UNIFIÉ -->
+    <footer>
+        <div class="footer_logo">
+            <img src="img/logos/logofooter.png" alt="Raja Logo Footer">
+        </div>
+        <div class="prt-1">
+            <h4>Navigation Rapide</h4>
+            <ul>
+                <li><a href="Acceuil.html">ACCUEIL</a></li>
+                <li><a href="Equipe.html">ÉQUIPE</a></li>
+                <li><a href="Boutique.html">BOUTIQUE</a></li>
+                <li><a href="Match.html">CENTRE DE MATCH</a></li>
+            </ul>
+        </div>
+        <div class="prt-2">
+            <ul>
+                <li><a href="Actualite.html">ACTUALITÉ</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+                <li><a href="Panier.html">Panier</a></li>
+            </ul>
+        </div>
+        <div class="prt-3">
+            <h4>NE RATEZ RIEN DE L'AIGLE</h4>
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="input_grp">
+                    <input type="email" id="email_footer" required placeholder=" ">
+                    <label for="email_footer">Email</label>
+                </div>
+                <button type="submit" class="btn-newsletter">S'abonner</button>
+            </form>
+            <p>Inscrivez-vous pour être le premier informé des nouveaux maillots et des résultats.</p>
+        </div>
+    </footer>
+
+    <!-- POP-UP ALERT (Khassha tkoun f ga3 les pages lteht qbel </body>) -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-box">
+            <h3 id="alertTitle">Succès</h3>
+            <p id="alertMessage">Votre message a été envoyé avec succès !</p>
+            <button class="alert-btn" onclick="closeAlert()">D'accord</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
