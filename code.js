@@ -145,14 +145,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 1. Validation: Champ vide
             if (emailValue === "") {
-                showAlert("Erreur", "3affak dkhl l-adresse email dyalak !");
+                showAlert("Erreur", "entrer adresse email ");
                 return;
             }
 
             // 2. Validation: Format email
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailValue)) {
-                showAlert("Erreur", "L-email li dkhalti machi sahih !");
+                showAlert("Erreur", "erreur dans email");
                 return;
             }
 
@@ -515,14 +515,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Validation : Check if fields are empty
             if (nom === "" || email === "" || sujet === "" || message === "") {
-                showAlert("Erreur", "3affak 3amar ga3 l-champs (champs obligatoires) !");
+                showAlert("Erreur", "remplir tout les champs obligatoires !");
                 return;
             }
 
             // Validation Email
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                showAlert("Erreur", "L-adresse email li dkhalti machi sahiha !");
+                showAlert("Erreur", "L-adresse email est incorrect");
                 return;
             }
 
@@ -549,7 +549,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailValue)) {
-                showAlert("Erreur", "L-email li dkhalti machi sahih !");
+                showAlert("Erreur", "L-email est incorrect");
                 return;
             }
 
